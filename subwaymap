@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>東京地鐵站代號 · 每日路線</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f0c09; --surface:#1a1410; --card:#221c16;
+  --border:rgba(255,255,255,0.07);
+  --gold:#C9922A; --gold-lt:#e8b86d; --red:#c0392b;
+  --cream:#f5ede0; --muted:rgba(245,237,224,0.45);
+  --green:#7ec8a0;
+  --E:#B5121B; --A:#EF8200; --S:#5FAD41; --G:#F39700;
+  --H:#888; --F:#8B5E31; --M:#E82020; --Z:#009BBF;
+  --U:#00A89A; --JC:#F15A22; --OD:#009F6B; --TX:#555;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--cream);font-family:'Noto Sans TC',sans-serif;padding-bottom:48px}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1a0a04,#2d1608,#1a0a04);border-bottom:2px solid var(--gold);padding:18px 16px 14px;position:sticky;top:0;z-index:50}
+.header-title{font-size:1.2rem;font-weight:700;color:var(--gold-lt)}
+.header-sub{font-size:.68rem;color:var(--muted);letter-spacing:.15em;font-family:'Space Mono',monospace;margin-top:2px}
+.day-tabs{display:flex;gap:6px;overflow-x:auto;padding-top:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:6px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;cursor:pointer;transition:all .2s;border-radius:2px;letter-spacing:.05em}
+.tab.active{background:var(--gold);border-color:var(--gold);color:#1a0a04}
+
+/* MAIN */
+main{padding:14px}
+.day-section{display:none}
+.day-section.active{display:block}
+
+/* DAY HERO */
+.day-hero{background:var(--surface);border-left:4px solid var(--gold);padding:13px 16px;margin-bottom:12px}
+.day-label{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:3px}
+.day-name{font-size:1.1rem;font-weight:700;line-height:1.3}
+.day-desc{font-size:.76rem;color:var(--muted);margin-top:3px;line-height:1.6}
+
+/* ROUTE CARD */
+.route-card{background:var(--card);border:1px solid var(--border);margin-bottom:10px;overflow:hidden}
+.route-header{display:flex;align-items:center;gap:8px;padding:9px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border)}
+.move-num{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);flex-shrink:0;width:20px}
+.move-label{font-size:.78rem;font-weight:700;flex:1}
+.tbadge{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:2px;flex-shrink:0;color:white}
+.tb-E{background:var(--E)} .tb-A{background:var(--A)} .tb-S{background:var(--S);color:#111}
+.tb-G{background:var(--G);color:#111} .tb-H{background:var(--H)}
+.tb-F{background:var(--F)} .tb-M{background:var(--M)} .tb-U{background:var(--U)}
+.tb-JC{background:var(--JC)} .tb-OD{background:var(--OD)} .tb-TX{background:var(--TX)}
+.tb-walk{background:#1e3a1e;color:var(--green)}
+
+/* STATION ROW */
+.station-row{display:grid;grid-template-columns:1fr 32px 1fr;align-items:center;gap:4px;padding:12px 14px}
+.sbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:10px 10px 8px;min-width:0}
+.srole{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+.srole.dep{color:var(--gold)} .srole.arr{color:var(--green)}
+.sname{font-size:.95rem;font-weight:700;line-height:1.25;margin-bottom:4px}
+.scodes{display:flex;flex-wrap:wrap;gap:3px}
+.chip{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:2px;color:white;display:inline-block}
+.cE{background:var(--E)} .cA{background:var(--A)} .cS{background:var(--S);color:#111}
+.cG{background:var(--G);color:#111} .cH{background:var(--H)} .cF{background:var(--F)}
+.cM{background:var(--M)} .cZ{background:var(--Z)} .cU{background:var(--U)}
+.cJC{background:var(--JC)} .cOD{background:var(--OD)} .cTX{background:var(--TX)}
+.sexit{margin-top:5px;font-size:.72rem;background:rgba(255,255,255,.07);display:inline-block;padding:2px 7px}
+.arrow-col{display:flex;flex-direction:column;align-items:center;gap:2px}
+.arrow-icon{font-size:1.1rem;color:var(--muted)}
+.walk-tag{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);text-align:center;line-height:1.4}
+
+/* sub-note inside card */
+.card-sub{padding:0 14px 12px;font-size:.74rem;color:var(--muted);line-height:1.7}
+.card-sub span{color:var(--cream)}
+
+/* NOTE BARS */
+.nbar{margin:0 14px 10px;padding:9px 12px;font-size:.75rem;line-height:1.65;border-left:3px solid}
+.nbar.warn{background:rgba(192,57,43,.12);border-color:var(--red);color:#f5a49b}
+.nbar.info{background:rgba(201,146,42,.1);border-color:var(--gold);color:var(--gold-lt)}
+.nbar strong{color:white}
+
+/* SECTION DIVIDER within a page */
+.day-divider{border:none;border-top:1px solid rgba(201,146,42,.3);margin:16px 0 12px}
+
+/* LEGEND */
+.legend-sec{margin:16px 0 0;border-top:1px solid var(--border);padding-top:14px}
+.legend-title{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.legend-item{display:flex;align-items:center;gap:8px;background:var(--card);padding:8px 10px;border:1px solid var(--border)}
+.ldot{width:28px;height:22px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:white;flex-shrink:0;border-radius:2px}
+.lcode{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);font-weight:700}
+.lname{font-size:.72rem;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* KEY STATION CARD */
+.keybox{background:var(--card);border:1px solid var(--border);padding:13px 14px;margin-bottom:8px}
+.keybox-warn{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);padding:13px 14px}
+
+.page-footer{text-align:center;padding:22px 16px 4px;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">🚇 東京地鐵 · 每日路線</div>
+  <div class="header-sub">TOKYO 2026 · 6/21–6/27 · 站名代號速查</div>
+  <div class="day-tabs">
+    <button class="tab active" onclick="showDay('d1',this)">D1</button>
+    <button class="tab" onclick="showDay('d2',this)">D2</button>
+    <button class="tab" onclick="showDay('d3',this)">D3</button>
+    <button class="tab" onclick="showDay('d4',this)">D4</button>
+    <button class="tab" onclick="showDay('d5',this)">D5</button>
+    <button class="tab" onclick="showDay('d6',this)">D6</button>
+    <button class="tab" onclick="showDay('d7',this)">D7</button>
+    <button class="tab" onclick="showDay('legend',this)">路線表</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════ D1 ══════════ -->
+<div class="day-section active" id="d1">
+  <div class="day-hero">
+    <div class="day-label">D1 · 6/21 SUN</div>
+    <div class="day-name">✈ 新宿 · 抵達首日</div>
+    <div class="day-desc">🎟 叙々苑 オペラシティ 53F · 19:00</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">羽田機場 → 民宿（東新宿）</span>
+      <span class="tbadge tb-TX">TAXI</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">羽田空港<br>第2ターミナル</div>
+        <div class="scodes"><span class="chip cTX">HND T2</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">Taxi<br>直達</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">民宿<br>新宿大久保</div>
+        <div class="scodes"><span class="chip cE">E02</span><span class="chip cF">F12</span></div>
+        <div class="sexit">東新宿站周邊</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">民宿 → 叙々苑（若時間充裕）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">2站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿→初台<br>オペラシティ</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+        <div class="sexit">或直接 Taxi</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar warn">⚠ 若 19:20 仍在機場，<strong>直接搭 Taxi 去オペラシティ</strong>，勿先回民宿！</div>
+</div>
+
+<!-- ══════════ D2 ══════════ -->
+<div class="day-section" id="d2">
+  <div class="day-hero">
+    <div class="day-label">D2 · 6/22 MON</div>
+    <div class="day-name">⛵ 淺草 一日遊</div>
+    <div class="day-desc">🎟 人力車 10:30 · 🎟 忍者 15:00 · 🎟 屋形船 19:20</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 藏前（第一段，出站換乘）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+        <div class="sexit">往兩國方向</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">9站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">藏前</div>
+        <div class="scodes"><span class="chip cE">E11</span></div>
+        <div class="sexit">⚠ 出站換乘！</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar warn">⚠ <strong>藏前站是站外換乘</strong>——出站後走到地面，跟著橘色標誌步行約 5 分鐘，才能進入淺草線月台（兩線各有不同入口）。</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">藏前 → 淺草（換淺草線）</span>
+      <span class="tbadge tb-A">淺草線 A</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">藏前</div>
+        <div class="scodes"><span class="chip cA">A17</span></div>
+        <div class="sexit">淺草線入口</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">1站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">淺草</div>
+        <div class="scodes"><span class="chip cA">A18</span></div>
+        <div class="sexit">出 A4 出口</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">③</span>
+      <span class="move-label">淺草周邊 → 屋形船 門前仲町（🎟 19:20出航）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">藏前</div>
+        <div class="scodes"><span class="chip cE">E11</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">4站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">門前仲町</div>
+        <div class="scodes"><span class="chip cE">E15</span></div>
+        <div class="sexit">出 4 號出口</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar info">📍 出 4 號出口後<strong>步行約 15 分鐘</strong>至越中島公園乘船場</div>
+</div>
+
+<!-- ══════════ D3 ══════════ -->
+<div class="day-section" id="d3">
+  <div class="day-hero">
+    <div class="day-label">D3 · 6/23 TUE</div>
+    <div class="day-name">✨ 築地 · teamLab · 銀座 · 新宿マルイ · 六歌仙</div>
+    <div class="day-desc">🎟 teamLab 12:30 死線 · 銀座購物 · 新宿マルイ（oioi marui）· 🎟 六歌仙 20:45</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 築地市場（直達約20分）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+        <div class="sexit">往兩國方向</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">直達<br>約20分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">築地市場</div>
+        <div class="scodes"><span class="chip cE">E18</span></div>
+        <div class="sexit">出 A1 出口</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">築地 → 🎟 teamLab 新豐洲（⚠ 12:30前到！）</span>
+      <span class="tbadge tb-U">大江戶→百合海鷗</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">築地市場</div>
+        <div class="scodes"><span class="chip cE">E18</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→汐留<br>轉車</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新豐洲</div>
+        <div class="scodes"><span class="chip cU">U-15</span></div>
+        <div class="sexit">徒步 1 分到teamLab</div>
+      </div>
+    </div>
+    <div class="card-sub">換乘方式：大江戶 <span>E18 築地市場</span> → <span>E19 汐留</span>出站 → 百合海鷗號 <span>U-03 汐留</span> → <span>U-15 新豐洲</span></div>
+  </div>
+  <div class="nbar warn">⚠ <strong>12:30～13:30 間必須入場！</strong>超過時間直接無法進入，不退票。</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">③</span>
+      <span class="move-label">teamLab後 → 銀座購物（約 15:30）</span>
+      <span class="tbadge tb-G">百合海鷗→銀座線 G</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新豐洲</div>
+        <div class="scodes"><span class="chip cU">U-15</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→汐留<br>→大江戶<br>→銀座</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">銀座</div>
+        <div class="scodes"><span class="chip cG">G09</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">④</span>
+      <span class="move-label">銀座 → 新宿マルイ（oioi marui）</span>
+      <span class="tbadge tb-M">丸之內線 M</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">銀座</div>
+        <div class="scodes"><span class="chip cG">G09</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">直達</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿三丁目<br>マルイ (oioi)</div>
+        <div class="scodes"><span class="chip cM">M09</span></div>
+        <div class="sexit">出 A1 出口・正門</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">⑤</span>
+      <span class="move-label">新宿マルイ → 🎟 六歌仙（20:45）</span>
+      <span class="tbadge tb-walk">步行 5 分</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿三丁目</div>
+        <div class="scodes"><span class="chip cM">M09</span><span class="chip cF">F13</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">步行<br>5分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">六歌仙<br>Sun Flower 6-7F</div>
+        <div class="scodes"><span class="chip cE">E27 D5出口</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ D4 ══════════ -->
+<div class="day-section" id="d4">
+  <div class="day-hero">
+    <div class="day-label">D4 · 6/24 WED</div>
+    <div class="day-name">🗼 秋葉原 · 六本木 · 天冨良 · 西口思出橫丁🏮</div>
+    <div class="day-desc">🎟 City View 18:20 · 🎟 天冨良 21:00 · 新宿西口思出橫丁80家居酒屋</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 御茶之水 樂器街・秋葉原</span>
+      <span class="tbadge tb-S">大江戶E → 新宿線S</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→森下<br>換車</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">岩本町</div>
+        <div class="scodes"><span class="chip cS">S08</span></div>
+        <div class="sexit">出 A3 出口→秋葉原步行5分</div>
+      </div>
+    </div>
+    <div class="card-sub">換乘：大江戶 <span>E02</span> → <span>E13 森下</span> → 都營新宿線 <span>S13 森下</span> → <span>S08 岩本町</span></div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">秋葉原 → 🎟 六本木 City View（18:20）</span>
+      <span class="tbadge tb-H">日比谷線 H</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">秋葉原</div>
+        <div class="scodes"><span class="chip cH">H16</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">約12分<br>直達</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">六本木</div>
+        <div class="scodes"><span class="chip cH">H04</span></div>
+        <div class="sexit">出 1C 出口・直通Hills</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar warn">⚠ <strong>19:50 前必須離開六本木！</strong>六本木站月台深 42 公尺，搭電梯需預留時間。</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">③</span>
+      <span class="move-label">六本木 → 新宿（🎟 天冨良 21:00）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">六本木</div>
+        <div class="scodes"><span class="chip cE">E23</span></div>
+        <div class="sexit">往都廳前方向</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">約9分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+        <div class="sexit">出 6 號出口・步行3分</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">④</span>
+      <span class="move-label">天冨良後 → 新宿西口思出橫丁 🏮</span>
+      <span class="tbadge tb-walk">步行 5 分</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿站<br>6 號出口</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">步行<br>5分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">西口思出橫丁<br>80家居酒屋</div>
+        <div class="scodes"><span class="chip" style="background:#8B6914">昭和 🏮</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">⑤</span>
+      <span class="move-label">思出橫丁後 → 民宿</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">2站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ D5 ══════════ -->
+<div class="day-section" id="d5">
+  <div class="day-hero">
+    <div class="day-label">D5 · 6/25 THU</div>
+    <div class="day-name">🎬 吉祥寺 · 吉卜力美術館</div>
+    <div class="day-desc">🎟 利久 11:15 · 吉祥寺藥妝 · 🎟 吉卜力 16:00 最終場 · 🎟 前田屋 20:30</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 新宿 LUMINE EST（🎟 利久 11:15）</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">2站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿<br>LUMINE EST 7F</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+        <div class="sexit">往東口方向</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">新宿 → 吉祥寺（Sunroad 藥妝採買）</span>
+      <span class="tbadge tb-JC">JR 中央線</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿</div>
+        <div class="scodes"><span class="chip cJC">JC05</span></div>
+        <div class="sexit">快速・約15分</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">直達</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">吉祥寺</div>
+        <div class="scodes"><span class="chip cJC">JC11</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">③</span>
+      <span class="move-label">吉祥寺 → 三鷹（🎟 吉卜力接駁，⚠ 15:20前到！）</span>
+      <span class="tbadge tb-JC">JR 中央線</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">吉祥寺</div>
+        <div class="scodes"><span class="chip cJC">JC11</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">1站<br>3分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">三鷹</div>
+        <div class="scodes"><span class="chip cJC">JC12</span></div>
+        <div class="sexit">南口排黃色接駁巴士</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar warn">⚠ <strong>15:20 前</strong>到三鷹站南口排接駁巴士。帶<strong>護照正本 + 紙本 QRCode</strong>（全員），缺一不可！</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">④</span>
+      <span class="move-label">三鷹 → 新宿（🎟 前田屋 20:30）</span>
+      <span class="tbadge tb-JC">JR 中央線</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">三鷹</div>
+        <div class="scodes"><span class="chip cJC">JC12</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">約18分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿<br>前田屋・東口</div>
+        <div class="scodes"><span class="chip cJC">JC05</span></div>
+        <div class="sexit">東口步行 3 分</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">⑤</span>
+      <span class="move-label">前田屋後 → 民宿</span>
+      <span class="tbadge tb-E">大江戶 E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿</div>
+        <div class="scodes"><span class="chip cE">E27</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">2站</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ D6 ══════════ -->
+<div class="day-section" id="d6">
+  <div class="day-hero">
+    <div class="day-label">D6 · 6/26 FRI</div>
+    <div class="day-name">🌆 豪德寺 · mipig · SHIBUYA SKY · 炭治郎</div>
+    <div class="day-desc">🎟 かにざんまい 12:15 · 🎟 mipig 15:00 · 🎟 SHIBUYA SKY 18:30 · 🎟 炭治郎 20:30<br>購物：PARCO（潮流百貨）· CDG · Human Made</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 豪德寺（招財貓）</span>
+      <span class="tbadge tb-OD">大江戶→小田急</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+        <div class="sexit">→大江戶→新宿</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→新宿<br>→小田急</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">豪德寺</div>
+        <div class="scodes"><span class="chip cOD">小田急</span></div>
+        <div class="sexit">出站跟貓腳印走</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">②</span>
+      <span class="move-label">豪德寺 → 🎟 かにざんまい 新宿三丁目（12:15）</span>
+      <span class="tbadge tb-M">小田急→新宿→地鐵</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">豪德寺</div>
+        <div class="scodes"><span class="chip cOD">小田急</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→新宿</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">新宿三丁目</div>
+        <div class="scodes"><span class="chip cM">M09</span><span class="chip cF">F13</span></div>
+        <div class="sexit">出 B3 出口</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nbar info">🛍 午餐後 PARCO（潮流百貨）· CDG · Human Made 購物時間，在新宿三丁目或澀谷PARCO（潮流百貨）皆可</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">③</span>
+      <span class="move-label">新宿 → 🎟 mipig 原宿（⚠ 14:00出發！）</span>
+      <span class="tbadge tb-F">副都心線 F</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">新宿三丁目</div>
+        <div class="scodes"><span class="chip cF">F13</span></div>
+        <div class="sexit">⚠ 14:00 出發</div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">2站<br>約5分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">明治神宮前</div>
+        <div class="scodes"><span class="chip cF">F19</span></div>
+        <div class="sexit">出 5 號出口・步行5分</div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar warn">⚠ 規定<strong>提前 10 分鐘到場</strong>，14:00 從新宿出發才來得及。</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">④</span>
+      <span class="move-label">原宿 → 🎟 SHIBUYA SKY 澀谷（18:30）</span>
+      <span class="tbadge tb-F">副都心線 F</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">明治神宮前</div>
+        <div class="scodes"><span class="chip cF">F19</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">1站<br>2分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">澀谷<br>Scramble Square</div>
+        <div class="scodes"><span class="chip cF">F16</span></div>
+        <div class="sexit">出 B6 出口・直通頂樓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nbar info">🛍 SHIBUYA SKY 前後可逛澀谷 PARCO（潮流百貨）— CDG · Human Made · KITH，在 Scramble Crossing 旁</div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">⑤</span>
+      <span class="move-label">SHIBUYA SKY → 🎟 炭治郎（20:30）</span>
+      <span class="tbadge tb-walk">步行 10 分</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">澀谷<br>SHIBUYA SKY</div>
+        <div class="scodes"><span class="chip cF">F16</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">步行<br>10分</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">炭治郎<br>Atlas澀谷 4F</div>
+        <div class="scodes"><span class="chip" style="background:#8B1A2F">公園通</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">⑥</span>
+      <span class="move-label">炭治郎後 → 民宿</span>
+      <span class="tbadge tb-F">副都心F → 大江戶E</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">澀谷</div>
+        <div class="scodes"><span class="chip cF">F16</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">→新宿三丁目<br>換大江戶</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">東新宿</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ D7 ══════════ -->
+<div class="day-section" id="d7">
+  <div class="day-hero">
+    <div class="day-label">D7 · 6/27 SAT</div>
+    <div class="day-name">✈ 返程 · 羽田機場</div>
+    <div class="day-desc">10:30 Taxi 接送 · NH853 13:20 HND→15:50 TSA</div>
+  </div>
+
+  <div class="route-card">
+    <div class="route-header">
+      <span class="move-num">①</span>
+      <span class="move-label">民宿 → 羽田機場（Taxi 已預約）</span>
+      <span class="tbadge tb-TX">TAXI 10:30</span>
+    </div>
+    <div class="station-row">
+      <div class="sbox">
+        <div class="srole dep">出發</div>
+        <div class="sname">東新宿<br>民宿大廳等候</div>
+        <div class="scodes"><span class="chip cE">E02</span></div>
+      </div>
+      <div class="arrow-col"><span class="arrow-icon">→</span><span class="walk-tag">Taxi<br>直達</span></div>
+      <div class="sbox">
+        <div class="srole arr">抵達</div>
+        <div class="sname">羽田空港<br>第2ターミナル</div>
+        <div class="scodes"><span class="chip cTX">HND T2</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="nbar info">🍰 入關後搶購 <strong>NEWYORK PERFECT CHEESE</strong>（機場限定甜點）<br>✈ NH853 · 13:20 出發 → 15:50 抵達松山</div>
+</div>
+
+<!-- ══════════ 路線表 ══════════ -->
+<div class="day-section" id="legend">
+  <div class="day-hero">
+    <div class="day-label">Line Code Reference</div>
+    <div class="day-name">路線代號對照表</div>
+    <div class="day-desc">字母 = 路線 · 數字 = 站序號 · 顏色 = 路線色</div>
+  </div>
+
+  <div class="legend-sec">
+    <div class="legend-title">都營地鐵 Toei Subway</div>
+    <div class="legend-grid">
+      <div class="legend-item"><div class="ldot" style="background:var(--E)">E</div><div><div class="lcode">大江戶線</div><div class="lname">Oedo · 紅 · 最常用</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--A)">A</div><div><div class="lcode">淺草線</div><div class="lname">Asakusa · 橘紅</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--S);color:#111">S</div><div><div class="lcode">新宿線</div><div class="lname">Shinjuku · 黃綠</div></div></div>
+    </div>
+  </div>
+
+  <div class="legend-sec">
+    <div class="legend-title">東京 Metro</div>
+    <div class="legend-grid">
+      <div class="legend-item"><div class="ldot" style="background:var(--G);color:#111">G</div><div><div class="lcode">銀座線</div><div class="lname">Ginza · 橘黃</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--H)">H</div><div><div class="lcode">日比谷線</div><div class="lname">Hibiya · 灰銀</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--M)">M</div><div><div class="lcode">丸之內線</div><div class="lname">Marunouchi · 紅</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--F)">F</div><div><div class="lcode">副都心線</div><div class="lname">Fukutoshin · 褐</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--Z)">Z</div><div><div class="lcode">半藏門線</div><div class="lname">Hanzomon · 藍</div></div></div>
+    </div>
+  </div>
+
+  <div class="legend-sec">
+    <div class="legend-title">其他路線</div>
+    <div class="legend-grid">
+      <div class="legend-item"><div class="ldot" style="background:var(--JC)">JC</div><div><div class="lcode">JR 中央線</div><div class="lname">Chuo · 橘紅</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--U)">U</div><div><div class="lcode">百合海鷗號</div><div class="lname">Yurikamome · 藍綠</div></div></div>
+      <div class="legend-item"><div class="ldot" style="background:var(--OD)">OD</div><div><div class="lcode">小田急線</div><div class="lname">Odakyu · 深綠</div></div></div>
+    </div>
+  </div>
+
+  <div class="legend-sec">
+    <div class="legend-title">⭐ 本次最常用站</div>
+    <div class="keybox">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span class="chip cE" style="font-size:.85rem;padding:4px 12px">E02</span>
+        <div><div style="font-weight:700">東新宿</div><div style="font-size:.72rem;color:var(--muted)">民宿最近站・每天出發點</div></div>
+      </div>
+    </div>
+    <div class="keybox">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span class="chip cE" style="font-size:.8rem;padding:3px 10px">E27</span>
+          <span class="chip cJC" style="font-size:.8rem;padding:3px 10px">JC05</span>
+        </div>
+        <div><div style="font-weight:700">新宿</div><div style="font-size:.72rem;color:var(--muted)">最大轉乘樞紐・走錯出口差很遠</div></div>
+      </div>
+    </div>
+    <div class="keybox">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span class="chip cM" style="font-size:.8rem;padding:3px 10px">M09</span>
+          <span class="chip cF" style="font-size:.8rem;padding:3px 10px">F13</span>
+        </div>
+        <div><div style="font-weight:700">新宿三丁目</div><div style="font-size:.72rem;color:var(--muted)">マルイ・かにざんまい・PARCO（潮流百貨）</div></div>
+      </div>
+    </div>
+    <div class="keybox-warn" style="margin-top:8px">
+      <div style="font-size:.8rem;color:#f5a49b;line-height:1.9">
+        ⚠ <strong style="color:white">藏前 E11 / A17</strong> — 站外換乘，出站走橘色標誌 5 分鐘<br>
+        ⚠ <strong style="color:white">六本木 E23</strong> — 月台深 42 公尺，多預留時間
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="page-footer">TOKYO 2026 · 6/21–6/27 · Andy Garden Inn 新宿大久保 1-4-5</div>
+
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
