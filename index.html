@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東京六天五夜 · 家庭旅遊手冊 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1917;--ink2:#44403c;--ink3:#78716c;--ink4:#a8a29e;
+  --paper:#faf9f7;--paper2:#f3f1ed;--paper3:#e8e4dd;
+  --accent:#c2410c;--gold:#b45309;--gold-l:#fef3c7;
+  --green:#15803d;--green-l:#dcfce7;
+  --blue:#1d4ed8;--blue-l:#eff6ff;
+  --red-l:#fee2e2;--red:#991b1b;
+  --border:#e2ddd6;--r:10px;--rl:16px;
+  --shadow:0 1px 3px rgba(28,25,23,.06),0 4px 16px rgba(28,25,23,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.6}
+.hdr{background:var(--ink);color:var(--paper);padding:3rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(194,65,12,.18),transparent 70%);pointer-events:none}
+.hdr-eye{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink4);margin-bottom:.75rem}
+.hdr-title{font-family:'Shippori Mincho',serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:600;line-height:1.1;margin-bottom:.4rem}
+.hdr-title span{color:#fb923c}
+.hdr-sub{font-size:14px;color:var(--ink4);margin-bottom:2rem}
+.fstrip{display:inline-flex;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:50px;overflow:hidden;font-size:12px;flex-wrap:wrap;justify-content:center}
+.fi{padding:.45rem 1.1rem;color:#d6d3d1}.fi+.fi{border-left:1px solid rgba(255,255,255,.1)}.fi b{color:#fff}
+.nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none;padding:0 1rem}
+.nav::-webkit-scrollbar{display:none}
+.ntab{flex-shrink:0;padding:.85rem .9rem;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.ntab:hover{color:var(--ink)}.ntab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.main{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.panel{display:none}.panel.active{display:block}
+.irow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.ic{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:.8rem 1rem;box-shadow:var(--shadow)}
+.ic-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink4);font-weight:500;margin-bottom:4px}
+.ic-val{font-size:13px;font-weight:600;color:var(--ink)}.ic-sub{font-size:11px;color:var(--ink3);margin-top:2px}
+.dc{background:#fff;border:1px solid var(--border);border-radius:var(--rl);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+.dt{display:flex;align-items:center;gap:14px;padding:1rem 1.25rem;cursor:pointer;transition:background .15s;user-select:none}
+.dt:hover{background:var(--paper2)}
+.dnum{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;letter-spacing:.05em}
+.dmeta{flex:1}.dtitle{font-size:15px;font-weight:600;color:var(--ink)}.ddate{font-size:12px;color:var(--ink3);margin-top:1px}
+.dchev{font-size:18px;color:var(--ink4);transition:transform .22s;flex-shrink:0}.dchev.open{transform:rotate(180deg)}
+.dbody{border-top:1px solid var(--paper3);padding:1.25rem;display:none}.dbody.open{display:block}
+.sh{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin:1.25rem 0 .6rem;display:flex;align-items:center;gap:6px}
+.sh:first-child{margin-top:0}.sh::after{content:'';flex:1;height:1px;background:var(--paper3)}
+.al{border-radius:8px;padding:.75rem 1rem;margin-bottom:10px;border-left:3px solid}
+.al-warn{background:var(--gold-l);border-color:var(--gold)}.al-warn .at{color:var(--gold)}.al-warn .ab{color:#78350f}
+.al-ok{background:var(--green-l);border-color:var(--green)}.al-ok .at{color:var(--green)}.al-ok .ab{color:#14532d}
+.al-info{background:var(--blue-l);border-color:var(--blue)}.al-info .at{color:var(--blue)}.al-info .ab{color:#1e3a8a}
+.al-red{background:var(--red-l);border-color:var(--red)}.al-red .at{color:var(--red)}.al-red .ab{color:#7f1d1d}
+.at{font-size:12px;font-weight:600;margin-bottom:3px}.ab{font-size:12px;line-height:1.65}
+/* BREAKFAST */
+.bkfast{background:#fffdf5;border:1px solid #f5e8c0;border-radius:8px;padding:.75rem 1rem;margin-bottom:.85rem}
+.bk-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#a37b00;font-weight:700;margin-bottom:8px}
+.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.bk-item{display:flex;align-items:flex-start;gap:7px;padding:4px 0}
+.bk-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.bk-info{flex:1}.bk-name{font-size:11px;font-weight:600;color:var(--ink)}
+.bk-desc{font-size:10px;color:var(--ink3);line-height:1.4}
+.bk-dist{font-size:9px;color:var(--ink4);background:var(--paper3);padding:1px 6px;border-radius:8px;white-space:nowrap;margin-top:2px;display:inline-block}
+/* ACTIVITIES */
+.alist{display:flex;flex-direction:column}
+.aitem{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--paper3)}.aitem:last-child{border-bottom:none}
+.aleft{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:32px}
+.atime{font-size:9px;font-weight:700;color:var(--ink4);text-align:center;line-height:1.2}
+.adot{width:8px;height:8px;border-radius:50%;border:2px solid;background:#fff;flex-shrink:0}
+.abody{flex:1;min-width:0}
+.aname-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+.aname{font-size:13px;font-weight:600;color:var(--ink)}
+.adetail{font-size:12px;color:var(--ink3);line-height:1.5;margin-bottom:3px}
+.atip{font-size:11px;color:var(--ink4);font-style:italic;margin-top:2px}
+.anote{font-size:11px;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:4px 8px;margin-top:5px;color:#9a3412;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;border-radius:20px;padding:3px 9px;text-decoration:none;white-space:nowrap;transition:opacity .15s,transform .1s;flex-shrink:0}
+.chip:hover{opacity:.8;transform:translateY(-1px)}
+.cmap{background:#e8f0fe;color:#1a56db;border:1px solid #c7d7fd}
+.cbook{background:var(--gold-l);color:#92400e;border:1px solid #fde68a}
+.cdone{background:var(--green-l);color:#166534;border:1px solid #bbf7d0}
+.csub{color:#fff;border:none;font-size:10px}
+/* MEALS */
+.mgrid{display:grid;gap:8px}
+.mc{background:var(--paper2);border-radius:8px;padding:.7rem .85rem;border:1px solid var(--paper3)}
+.mtype{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink4);font-weight:600;margin-bottom:5px}
+.mnrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mname{font-size:12px;font-weight:600;color:var(--ink)}
+.mitems{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.5}
+.mback{font-size:10px;color:var(--ink4);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+/* BOOKING TABLE */
+.bwrap{overflow-x:auto}
+.btable{width:100%;border-collapse:collapse;min-width:520px}
+.btable th{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4);font-weight:600;text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--border)}
+.btable td{font-size:12px;padding:.65rem .75rem;border-bottom:1px solid var(--paper3);vertical-align:middle}
+.btable tr:last-child td{border-bottom:none}.btable tr:hover td{background:var(--paper2)}
+.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;border-radius:20px;padding:3px 9px;white-space:nowrap}
+.s-ok{background:var(--green-l);color:var(--green)}.s-wait{background:#fef9c3;color:#a16207}
+.s-field{background:var(--blue-l);color:var(--blue)}.s-urgent{background:var(--red-l);color:var(--red)}
+.s-cancel{background:var(--paper3);color:var(--ink4)}
+/* SHOPPING */
+.sday{margin-bottom:1.5rem}
+.sday-h{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.sbadge2{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;background:var(--ink);color:#fff;padding:2px 8px;border-radius:20px;letter-spacing:.04em}
+.sitems{display:flex;flex-direction:column;gap:6px}
+.sitem{background:#fff;border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;display:flex;align-items:flex-start;gap:10px}
+.sicon{font-size:16px;flex-shrink:0;margin-top:1px}.sbody{flex:1}
+.sname{font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sdesc{font-size:11px;color:var(--ink3);margin-top:2px;line-height:1.5}
+/* REMINDERS */
+.rcard{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;margin-bottom:10px;box-shadow:var(--shadow)}
+.rtitle{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.rtext{font-size:13px;color:var(--ink2);line-height:1.8}.rtext b{color:var(--ink);font-weight:600}
+@media(max-width:520px){.irow{grid-template-columns:1fr 1fr}.mgrid{grid-template-columns:1fr!important}.hdr-title{font-size:2rem}.bk-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-eye">家庭旅遊手冊 · 2026</div>
+  <h1 class="hdr-title">東京 <span>六天五夜</span></h1>
+  <p class="hdr-sub">6月21日（日）– 27日（六）· 新宿大久保</p>
+  <div class="fstrip">
+    <div class="fi">✈ <b>NH852</b> 13:30 松山→17:45 羽田T2</div>
+    <div class="fi">✈ <b>NH853</b> 13:20 羽田T2→15:50 松山</div>
+    <div class="fi">🏨 新宿大久保・民宿</div>
+  </div>
+</header>
+<nav class="nav">
+  <div class="ntab active" data-p="itinerary">📅 每日行程</div>
+  <div class="ntab" data-p="booking">🎟 訂票清單</div>
+  <div class="ntab" data-p="shopping">🛍 購物清單</div>
+  <div class="ntab" data-p="tips">📌 重要提醒</div>
+  <div class="ntab" data-p="transport">🚇 交通說明</div>
+  <div class="ntab" data-p="breakfast">🌅 早餐選項</div>
+</nav>
+<main class="main">
+
+<!-- ═══ ITINERARY ═══ -->
+<section class="panel active" id="panel-itinerary">
+<div class="irow" style="margin-top:.5rem">
+  <div class="ic"><div class="ic-lbl">住宿區域</div><div class="ic-val">新宿大久保</div><div class="ic-sub">東新宿站步行2分</div></div>
+  <div class="ic"><div class="ic-lbl">住址</div><div class="ic-val" style="font-size:11px">新宿区大久保</div><div class="ic-sub">東新宿站徒步圈</div></div>
+  <div class="ic"><div class="ic-lbl">吉卜力</div><div class="ic-val" style="color:var(--green)">✅ 已搶票</div><div class="ic-sub">6/25 16:00 · 攜帶護照</div></div>
+</div>
+<div id="dayCards"></div>
+</section>
+
+<!-- ═══ BOOKING ═══ -->
+<section class="panel" id="panel-booking">
+<div class="al al-ok" style="margin-bottom:1rem"><div class="at">✅ 所有主要預訂完成！SHIBUYA SKY 改為當天自由決定。</div><div class="ab">D6 逛街途中心情好就入場，不強求。主角是逛街＋甜點＋炭治郎！</div></div>
+<div class="bwrap"><table class="btable">
+  <thead><tr><th>日期</th><th>時間</th><th>項目</th><th>狀態</th><th>連結</th></tr></thead>
+  <tbody>
+    <tr><td>D1 6/21</td><td>21:00</td><td>叙々苑 東京オペラシティ 53F（5人・包廂窗邊）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=叙々苑+東京オペラシティ53F" target="_blank">地圖</a></td></tr>
+    <tr><td>D2 6/22</td><td>10:30</td><td>🎟 淺草人力車體驗</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=浅草+人力車+雷門+東京" target="_blank">地圖</a></td></tr>
+    <tr><td>D2 6/22</td><td>11:20</td><td>午餐：米久本店壽喜燒 或 Tonkatsu Yutaka炸豬排飯</td><td><span class="sbadge s-field">米久現場排隊 / Yutaka可App訂</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=米久本店+浅草+東京" target="_blank">米久地圖</a> <a class="chip cmap" href="https://maps.google.com/?q=Tonkatsu+Yutaka+浅草" target="_blank">Yutaka地圖</a></td></tr>
+    <tr><td>D2 6/22</td><td>15:00</td><td>🎟 忍者體驗咖啡館 淺草</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=Ninja+Experience+Cafe+Asakusa+Tokyo" target="_blank">地圖</a></td></tr>
+    <tr><td>D2 6/22</td><td>19:20</td><td>🎟 屋形船（越中島 · 天婦羅＋壽喜燒 · 5人）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=越中島+Etchujima+pier+屋形船" target="_blank">地圖</a></td></tr>
+    <tr><td>D3 6/23</td><td>12:30</td><td>🎟 teamLab Planets（場次12:30–16:00，13:00前入場）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=teamLab+Planets+TOKYO+豊洲" target="_blank">地圖</a></td></tr>
+    <tr><td>D3 6/23</td><td>20:45</td><td>燒肉亭 六歌仙 本館（3人 · 每人14,500日圓）</td><td><span class="sbadge s-ok">✅ 已付訂金</span></td><td><a class="chip cmap" href="https://maps.app.goo.gl/VPf31VwPuJvPxPdy6" target="_blank">地圖</a></td></tr>
+    <tr><td>D4 6/24</td><td>11:30</td><td>京都勝牛炸牛排 Yodobashi Akiba 8F（現場排隊）</td><td><span class="sbadge s-field">現場排隊領牌</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=牛カツ京都勝牛+ヨドバシAkiba+秋葉原" target="_blank">地圖</a></td></tr>
+    <tr><td>D4 6/24</td><td>18:00</td><td>🎟 Tokyo City View 52F（六本木Hills · 19:30離開）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=Tokyo+City+View+Roppongi+Hills+52F" target="_blank">地圖</a></td></tr>
+    <tr><td>D4 6/24</td><td>21:00</td><td>🎟 天冨良 麻布よこ田 新宿別邸（3人 · 每人12,000日圓）</td><td><span class="sbadge s-ok">✅ 已付訂金</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=天冨良+麻布よこ田+新宿別邸+西新宿" target="_blank">地圖</a></td></tr>
+    <tr><td>D5 6/25</td><td>11:30</td><td>🎟 利久 炭烤牛舌 LUMINE EST 新宿（5人）</td><td><span class="sbadge s-ok">✅ 已付訂金</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=牛たん炭焼利久+ルミネエスト新宿店" target="_blank">地圖</a></td></tr>
+    <tr><td>D5 6/25</td><td>16:00</td><td>🎟 吉卜力美術館 ⭐</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=三鷹の森ジブリ美術館" target="_blank">地圖</a></td></tr>
+    <tr><td>D5 6/25</td><td>20:30</td><td>博多もつ鍋 前田屋 新宿東口店（5人）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=博多もつ鍋+前田屋+新宿東口" target="_blank">地圖</a></td></tr>
+
+    <tr><td>D6 6/26</td><td>12:15</td><td>Kanizammai かにざんまい 新宿店（蟹肉放題 · 5人）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=かにざんまい+新宿店+東京" target="_blank">地圖</a></td></tr>
+    <tr><td>D6 6/26</td><td>15:00</td><td>🎟 mipig cafe 原宿（迷你豬・15:00場次）</td><td><span class="sbadge s-ok">✅ 已成功</span></td><td><a class="chip cdone" href="https://booking.ebica.jp/webrsv/plan_search/e020035901/20469" target="_blank">查預訂</a> <a class="chip cmap" href="https://maps.app.goo.gl/9ETC8ki9yu2eTtLQ7" target="_blank">地圖</a></td></tr>
+    <tr><td>D6 6/26</td><td>16:00</td><td>SHIBUYA SKY（可選・當天逛街途中決定）</td><td><span class="sbadge s-wait">🎫 可選入場</span></td><td><a class="chip cbook" href="https://www.shibuya-scramble-square.com/sky/ticket/" target="_blank">買票</a> <a class="chip cmap" href="https://maps.google.com/?q=SHIBUYA+SKY+渋谷スカイ" target="_blank">地圖</a></td></tr>
+    <tr><td>D6 6/26</td><td>20:45</td><td>🎟 炭治郎 澀谷 黑毛和牛吃到飽（5人）</td><td><span class="sbadge s-ok">✅ 已付訂金</span></td><td><a class="chip cmap" href="https://maps.google.com/?q=炭治郎+渋谷+黒毛和牛" target="_blank">地圖</a></td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<!-- ═══ SHOPPING ═══ -->
+<section class="panel" id="panel-shopping">
+<div id="shopContent"></div>
+</section>
+
+<!-- ═══ TIPS ═══ -->
+<section class="panel" id="panel-tips">
+
+<!-- 已完成預訂總覽 -->
+<div class="rcard" style="border-left:4px solid var(--accent);background:#fff;">
+  <div class="rtitle" style="color:var(--accent)">📋 已完成預訂餐廳總覽</div>
+  <div style="font-size:11px;color:var(--ink3);margin-bottom:12px">⚠️ <b style="color:var(--red)">加減人數統一收修改費 440日圓/人，不可折抵餐費。48小時以前接受修改，但仍酌收修改費。</b></div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D1 6/21 · 21:00 · 5人</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">叙々苑 東京オペラシティ 53F</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">包廂窗邊，提前10分鐘到，搭「高層階用」電梯</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=叙々苑+東京オペラシティ53F" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D3 6/23 · 20:45 · 3人 · 每人14,500日圓</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">燒肉亭 六歌仙 本館</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">新宿西口站D5出口30秒，Sunflower大樓6-7F，120分鐘，甜點結束前10分鐘提供</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.app.goo.gl/VPf31VwPuJvPxPdy6" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D4 6/24 · 21:00 · 3人 · 每人12,000日圓</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">天冨良 麻布よこ田 新宿別邸</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">西新宿1-19-13，新宿站6號出口步行3分鐘，Tabelog App查預訂</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=天冨良+麻布よこ田+新宿別邸+西新宿" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D5 6/25 · 11:30 · 5人</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">利久 炭烤牛舌 LUMINE EST 新宿</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">新宿站東口 LUMINE EST 7F，民宿步行12-14分鐘，Tabelog App查預訂</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=牛たん炭焼利久+ルミネエスト新宿店" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D5 6/25 · 20:30 · 5人</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">博多もつ鍋 前田屋 新宿東口店（牛腸鍋）</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">新宿站東口步行3分鐘，開到深夜12am</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=博多もつ鍋+前田屋+新宿東口" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D6 6/26 · 12:15 · 5人</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">Kanizammai かにざんまい 新宿店（蟹肉放題）</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">副都心線新宿三丁目站B3出口直通</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=かにざんまい+新宿店+東京" target="_blank">地圖</a></div>
+    </div>
+    <div style="background:var(--paper2);border-radius:8px;padding:.65rem .9rem;border:1px solid var(--border)">
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:2px">D6 6/26 · 20:45 · 5人</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink)">炭治郎 澀谷 黑毛和牛燒肉吃到飽</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:2px">Atlas澀谷公園通大樓4F，tablecheck App查預訂，提前10分鐘到</div>
+      <div style="margin-top:5px"><a class="chip cmap" href="https://maps.google.com/?q=炭治郎+渋谷+黒毛和牛" target="_blank">地圖</a></div>
+    </div>
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid var(--blue)">
+  <div class="rtitle">🎫 D6 SHIBUYA SKY — 當天自由決定</div>
+  <div class="rtext">剩 16:00 場次，黃昏光線拍照也很美。逛街途中心情好就買票入場，澀谷站B6出口直通Scramble Square，不強求！<br>這天主角是逛街＋甜點＋炭治郎。<br><br>
+  <a class="chip cbook" href="https://www.shibuya-scramble-square.com/sky/ticket/" target="_blank" style="font-size:12px;padding:5px 14px">🔗 SHIBUYA SKY 購票連結</a></div>
+</div>
+<div class="rcard" style="border-left:4px solid var(--accent)">
+  <div class="rtitle">⏰ D5 吉卜力 + 前田屋 全天時間表</div>
+  <div class="rtext">
+  <b>11:30</b> → 利久炭烤牛舌 LUMINE EST 7F（提前10分鐘到）<br>
+  <b>13:00</b> → 出發前往吉祥寺（省力線：東新宿→中野坂上→荻窪→吉祥寺）<br>
+  <b>13:30</b> → 吉祥寺 Sunroad 藥妝採買、佐藤肉餅炸牛肉丸<br>
+  <b>15:20</b> → 抵達三鷹站南口排接駁巴士<br>
+  <b>16:00</b> → 吉卜力美術館入場（最後一場！帶紙本QR Code + 護照）<br>
+  <b>18:00</b> → 閉館，穿井之頭公園散步到吉祥寺站（約15分鐘）<br>
+  <b>19:30</b> → JR 吉祥寺站搭中央線快速，直達新宿（15分鐘）<br>
+  <b>20:30</b> → 博多もつ鍋 前田屋 新宿東口店 ✅
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid var(--gold)">
+  <div class="rtitle">⏰ D4 全天時間精算表</div>
+  <div class="rtext">
+  <b>10:30</b> → 御茶之水樂器街（石橋樂器・BIGBOSS，11:00開門）<br>
+  <b>11:30</b> → 京都勝牛炸牛排 Yodobashi Akiba 8F（現場排隊30-40分，整抓1.5小時）<br>
+  <b>14:30</b> → 原宿・貓街（Cat Street）精準逛街<br>
+  <b>17:00</b> → 離開！搭都營巴士「澀01」（澀谷東口51號站牌）→ 六本木Hills<br>
+  <b>18:00</b> → Tokyo City View 52F 入場，看點燈東京鐵塔<br>
+  <b>19:30</b> → 離開，前往毛利庭園（蠟筆小新・哆啦A夢水中倒影！）<br>
+  <b>19:50</b> → 出發搭大江戶線（六本木站→新宿站，約9分鐘）<br>
+  <b>20:50</b> → 新宿站 <b>6號出口</b>，步行3分鐘<br>
+  <b>21:00</b> → 天冨良 麻布よこ田 入座 ✅<br><br>
+  ⚠️ 六本木站大江戶線在地下42公尺！提早移動。若超時直接搭計程車，約15分鐘直達。
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid #e67e22">
+  <div class="rtitle">🍽 D2 午餐兩選一：米久本店 vs Tonkatsu Yutaka</div>
+  <div class="rtext">
+  <b>選項A：米久本店 壽喜燒（現場排隊）</b><br>
+  傳承120年百年老店，只收現金，11:00 開始排隊，從雷門步行約12分鐘。高品質和牛，油花均勻入口即化。<br>
+  <a class="chip cmap" href="https://maps.google.com/?q=米久本店+浅草+東京" target="_blank" style="font-size:10px;vertical-align:middle;margin-left:4px">米久地圖</a><br><br>
+  <b>選項B：Tonkatsu Yutaka 炸豬排飯（可App訂位）</b><br>
+  可用 App 提前訂位，避免現場等待，適合不想排隊的選項。炸豬排香酥多汁。<br>
+  <a class="chip cmap" href="https://maps.google.com/?q=Tonkatsu+Yutaka+浅草+東京" target="_blank" style="font-size:10px;vertical-align:middle;margin-left:4px">Yutaka地圖</a>
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid #7c3aed">
+  <div class="rtitle">🎸 D4 御茶之水樂器街指南</div>
+  <div class="rtext">
+  <b>推薦：</b>石橋樂器(Ishiibashi)、BIGBOSS — 信譽好、可退稅，二手精品吉他狀況極佳。<a class="chip cmap" href="https://maps.google.com/?q=石橋楽器店+御茶ノ水+Tokyo" target="_blank" style="font-size:10px;vertical-align:middle;margin-left:4px">地圖</a><br>
+  <b>公婆：</b>Pronto 咖啡廳坐著等，或去神田明神・湯島聖堂古蹟散步（步行10分鐘）。<br>
+  <b>D4午餐備案：</b>若京都勝牛等太久，改吃丸五豬排（同樣是排隊名店）。<a class="chip cmap" href="https://maps.google.com/?q=丸五+秋葉原+東京" target="_blank" style="font-size:10px;vertical-align:middle">地圖</a>
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid #db2777">
+  <div class="rtitle">🐷 D6 mipig cafe 注意事項</div>
+  <div class="rtext">
+  <b>規定：</b>14:50 到場（提前10分鐘）。不可把豬抱起來，把腳伸直、保持安靜。體驗55分鐘。<br>
+  <b>交通：</b>新宿三丁目（副都心線F線）→ 明治神宮前站 5號出口，步行5分鐘。<br>
+  <b>分頭行動：</b>兒子+公婆去迷你豬時，你們夫妻專攻澀谷PARCO 潮流百貨（CDG / Human Made）！<br><br>
+  <a class="chip cdone" href="https://booking.ebica.jp/webrsv/plan_search/e020035901/20469" target="_blank" style="font-size:12px;padding:5px 14px">✅ 查看預訂</a>
+  </div>
+</div>
+
+<div class="rcard" style="border-left:4px solid var(--green)">
+  <div class="rtitle">🦀 D6 Kanizammai かにざんまい ✅ 已成功（5人）</div>
+  <div class="rtext">
+  <b>時間：</b>12:15 入座，副都心線新宿三丁目站 B3 出口<br>
+  <b>加碼推薦：</b>若有空檔，伊勢丹 鮨魯山也非常值得現場排隊，江戶板前壽司！<br><br>
+  <a class="chip cmap" href="https://maps.google.com/?q=かにざんまい+新宿店+東京" target="_blank" style="font-size:12px;padding:5px 14px">🗺 かにざんまい地圖</a>
+  </div>
+</div>
+<div class="rcard" style="border-left:4px solid var(--blue)">
+  <div class="rtitle">🚇 地鐵出口絕對導航</div>
+  <div class="rtext">
+  • 屋形船 → 門前仲町站 <b>4號出口</b>（步行約15分鐘至越中島公園乘船場）<br>
+  • Tokyo City View → 六本木站 <b>1C出口</b>（直通六本木Hills）<br>
+  • 麻布よこ田 → 新宿站 <b>6號出口</b>（西新宿1-19-13，步行3分鐘）<br>
+  • かにざんまい → 新宿三丁目站 <b>B3出口</b><br>
+  • SHIBUYA SKY → 澀谷站 <b>B6出口</b>（直通Scramble Square）<br>
+  • mipig cafe → 明治神宮前站 <b>5號出口</b>（步行5分鐘）<br>
+  • 豪德寺（可愛彩繪電車）→ 世田谷線 <b>宮之坂站</b><br>
+  • 六歌仙 → 新宿西口站 <b>D5出口</b>（30秒即達）
+  </div>
+</div>
+<div class="rcard">
+  <div class="rtitle">🍜 宵夜選項（民宿附近）</div>
+  <div class="rtext">
+  • <b>Ramen Zundou-ya</b> — 民宿附近24小時拉麵 <a class="chip cmap" href="https://maps.google.com/?q=ラーメン+ずんどう屋+東新宿" target="_blank" style="font-size:9px">地圖</a><br>
+  • <b>博多もつ鍋 前田屋 新宿東口店</b> — 開到12am，牛腸鍋（味噌/醬油/辣味），可App訂位 <a class="chip cmap" href="https://maps.google.com/?q=博多もつ鍋+前田屋+新宿東口" target="_blank" style="font-size:9px">地圖</a><br>
+  • <b>鳥貴族 Torikizoku</b> — 東新宿附近很多家，均一價串燒 <a class="chip cmap" href="https://maps.google.com/?q=鳥貴族+東新宿+東京" target="_blank" style="font-size:9px">地圖</a>
+  </div>
+</div>
+</section>
+
+<!-- ═══ TRANSPORT ═══ -->
+<section class="panel" id="panel-transport">
+<div class="rcard" style="background:var(--blue-l);border-color:#bfdbfe">
+  <div class="rtitle">💳 Suica 取得方式</div>
+  <div class="rtext">
+  <b>🌟 方式一：iPhone 手機錢包（最推薦）</b><br>
+  錢包App → 點「+」→ 搜尋「Suica」→ Apple Pay 儲值10,000日圓。免押金、免排隊，過閘門手機靠近感應區「嗶」聲通關。<br><br>
+  <b>方式二：羽田機場 Welcome Suica 紅色卡</b><br>
+  找「Welcome Suica」紅色售票機 → 切繁體中文 → 現金儲值。免500日圓押金，有效期28天。<br><br>
+  <b>方式三：東新宿站 PASMO PASSPORT</b><br>
+  民宿步行3-5分鐘，站內旅客服務中心，出示外國護照即可購買。
+  </div>
+</div>
+<div class="rcard">
+  <div class="rtitle">🛬 D1 抵達動線</div>
+  <div class="rtext">
+  <b>機場接送 Taxi 直達民宿</b>（車程約40-50分鐘）<br>
+  NH852 17:45落地 → 取行李 → 找接送司機 → 直達民宿<br><br>
+  ⚠️ 若19:20還在機場，請告知司機直接前往東京オペラシティ（約40分鐘），避免趕不上21:00叙々苑！
+  </div>
+</div>
+<div class="rcard">
+  <div class="rtitle">✈️ D7 返程動線</div>
+  <div class="rtext">
+  <b>機場接送 Taxi · 10:30 預定車</b>（車程約40-50分鐘）<br>
+  NH853 <b>13:20</b> 起飛 → 10:30 準時上車<br>
+  入關後記得買 <b>NEWYORK PERFECT CHEESE</b>！
+  </div>
+</div>
+<div class="rcard">
+  <div class="rtitle">🗺 常用路線快查（從東新宿出發）</div>
+  <div class="rtext" style="line-height:2.1">
+  <b>D2 淺草：</b>東新宿（大江戶線）→ 藏前（出站沿橘色標誌轉淺草線）→ 淺草 A4出口<br>
+  <b>D3 築地：</b>東新宿（大江戶線，往兩國方向）→ 築地市場站 A1出口<br>
+  <b>D3 teamLab：</b>築地市場（大江戶線）→ 汐留（轉百合海鷗號）→ 新豐洲<br>
+  <b>D3 六歌仙：</b>新豐洲（百合海鷗號）→ 汐留（轉大江戶線）→ 新宿西口 D5出口<br>
+  <b>D4 秋葉原：</b>東新宿（大江戶線）→ 森下（轉都營新宿線）→ 岩本町 A3出口<br>
+  <b>D4 原宿：</b>秋葉原（JR山手線）→ 原宿站竹下口<br>
+  <b>D4 六本木：</b>澀谷站東口51號站牌 搭都營巴士「澀01」→ 六本木Hills站（最近）<br>
+  <b>D4 麻布よこ田：</b>六本木（大江戶線）→ 新宿站 6號出口，步行3分鐘<br>
+  <b>D5 吉祥寺（省力線）：</b>東新宿（大江戶線）→ 中野坂上（轉丸之內線）→ 荻窪（轉JR）→ 吉祥寺<br>
+  <b>D5 吉卜力：</b>吉祥寺（JR中央線1站）→ 三鷹站南口 → 黃色接駁巴士<br>
+  <b>D6 豪德寺（可愛電車）：</b>東新宿（大江戶線）→ 新宿西口（步行至京王新宿）→ 明大前（轉世田谷線）→ 宮之坂站<br>
+  <b>D6 mipig：</b>新宿三丁目（副都心線F線，2站）→ 明治神宮前 5號出口<br>
+  <b>D6 SHIBUYA SKY：</b>明治神宮前（副都心線1站）→ 澀谷站 B6出口直通
+  </div>
+</div>
+</section>
+
+<!-- ═══ BREAKFAST ═══ -->
+<section class="panel" id="panel-breakfast">
+<div class="rcard" style="border-left:4px solid #a37b00;background:#fffdf5">
+  <div class="rtitle">🌅 民宿附近早餐選項</div>
+  <div class="rtext" style="font-size:12px">民宿位於東新宿站步行2分鐘，以下選項皆在步行距離內。</div>
+</div>
+<div id="bkPanel"></div>
+</section>
+
+<script>
+const G = q => `https://maps.google.com/?q=${encodeURIComponent(q)}`;
+const mc = (txt,q) => q ? `<a class="chip cmap" href="${G(q)}" target="_blank">🗺 ${txt}</a>` : '';
+const bc = (txt,url,done) => `<a class="chip ${done?'cdone':'cbook'}" href="${url}" target="_blank">${done?'✅':'🎟'} ${txt}</a>`;
+const sc = (txt,q,bg) => `<a class="chip csub" style="background:${bg}" href="${G(q)}" target="_blank">🚇 ${txt}</a>`;
+
+// ── BREAKFAST ──
+const bkData = [
+  {icon:'🍚',name:'なか卯 東新宿店',desc:'烤魚定食、親子丼、牛丼，道地日式，早晨最划算',dist:'步行3-5分',map:'なか卯 東新宿 東京',hours:'24小時'},
+  {icon:'🍞',name:'Bakery & Coffee DXD',desc:'高水準麵包種類多，搭手沖咖啡，度假儀式感',dist:'步行5-7分',map:'Bakery Coffee DXD 東新宿 東京 新宿区',hours:'07:00開門'},
+  {icon:'☕',name:"Tully's Coffee 東新宿店",desc:'地鐵站出口旁，熱狗堡/吐司套餐，快速解決',dist:'步行1-2分',map:"タリーズコーヒー 東新宿 東京",hours:'07:00開門'},
+  {icon:'☕',name:'Doutor 東新宿店',desc:'平價早餐套餐，環境安靜，適合悠閒用餐',dist:'步行1-2分',map:'ドトールコーヒー 東新宿 東京',hours:'07:00開門'},
+  {icon:'🥟',name:'Bamiyan バーミヤン 東新宿店',desc:'稀飯、煎餃、大滷麵，長輩接受度高，環境寬敞',dist:'步行3分',map:'バーミヤン 東新宿 東京',hours:'07:00開門'},
+  {icon:'🍜',name:'名代富士そば 東新宿店',desc:'24小時蕎麥/烏龍麵，湯頭熱呼呼，便宜又暖胃',dist:'步行3-5分',map:'名代富士そば 東新宿 東京',hours:'24小時'},
+  {icon:'🥩',name:'松屋 東新宿店',desc:'24小時朝食定食（至11:00），烤鮭魚/味噌湯/溫泉蛋',dist:'步行2-4分',map:'松屋 東新宿 東京',hours:'24小時'},
+  {icon:'🏪',name:'7-11 / FamilyMart / Lawson',desc:'明太子飯糰、炸雞、現磨咖啡，步行2分鐘內必有',dist:'步行1-2分',map:'ファミリーマート 東新宿 東京',hours:'24小時'},
+];
+
+function bkHTML(id) {
+  if (id==='d1') return '';
+  if (id==='d7') return '';
+  if (id==='d6') return `<div class="bkfast"><div class="bk-lbl">🌅 早餐 · D6 特別提示</div><div class="bk-items"><div class="bk-item"><div class="bk-icon">⏰</div><div class="bk-info"><div class="bk-name">08:15 出門去豪德寺，或 09:00 出門</div><div class="bk-desc">08:15 出門：Doutor 或 松屋，40分鐘內吃完立刻出發</div></div></div></div></div>`;
+  return '';
+}
+
+function renderBreakfast() {
+  const cont = document.getElementById('bkPanel');
+  if (!cont) return;
+  bkData.forEach(b => {
+    const card = document.createElement('div');
+    card.className = 'rcard';
+    card.style.cssText = 'display:flex;align-items:flex-start;gap:14px;margin-bottom:8px';
+    card.innerHTML = `
+      <div style="font-size:22px;flex-shrink:0;margin-top:2px">${b.icon}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          ${b.name}
+          <span style="font-size:9px;background:${b.hours==='24小時'?'#dcfce7':'#e8f0fe'};color:${b.hours==='24小時'?'#15803d':'#1d4ed8'};padding:2px 7px;border-radius:10px;font-weight:600">${b.hours}</span>
+          <a class="chip cmap" href="${G(b.map)}" target="_blank" style="font-size:10px">🗺 東新宿店</a>
+        </div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:3px">${b.desc}</div>
+        <div style="font-size:10px;color:var(--ink4);background:var(--paper3);padding:2px 8px;border-radius:8px;display:inline-block;margin-top:4px">🚶 ${b.dist}</div>
+      </div>`;
+    cont.appendChild(card);
+  });
+}
+
+// ── DAY DATA ──
+const days = [
+  {
+    id:'d1',label:'D1',date:'6/21 週日',title:'抵達東京 · 首晚慶功宴',area:'羽田→新宿',bg:'#E6F4EE',fg:'#14532d',
+    alerts:[],
+    acts:[
+      {time:'17:45',name:'抵達羽田機場 T2',map:'羽田空港第2ターミナル Tokyo',detail:'ANA NH852 落地，第2航廈取行李，前往接機大廳找接送司機。',tip:'確認接送司機名牌後出發。',sub:null,note:'🚖 機場接送 Taxi 已預訂'},
+      {time:'18:30',name:'搭 Taxi 直達民宿',map:'東新宿駅 新宿区大久保 東京',detail:'機場接送直達民宿，車程約40-50分鐘。',tip:'行李多、第一天到，搭 Taxi 最輕鬆！',sub:null,note:'⚠️ 若19:20還在機場，告知司機直接去東京オペラシティ！'},
+      {time:'21:00',name:'叙々苑 東京オペラシティ 53F 🎉',map:'叙々苑 東京オペラシティ53F',detail:'大江戶線東新宿→新宿西口→步行至京王新線→初台站東口，Opera City 53樓。進去找「高層階用」專用電梯。',tip:'景觀燒肉首餐，5人包廂窗邊座位！',sub:sc('京王新線・初台站東口','初台駅 東口 Tokyo Operacity','#e60012'),note:'⏰ 提前10分鐘到'},
+    ],
+    meals:[
+      {type:'晚餐 ✅已成功',name:'叙々苑 東京オペラシティ 53F',map:'叙々苑 東京オペラシティ53F',items:'特製牛五花、牛舌。53樓窗邊包廂，初台站東口步行即達。',book:null,back:'備案：鳥貴族 新宿（均一價串燒）',backMap:'鳥貴族 新宿 Tokyo'},
+    ],cols:1
+  },
+  {
+    id:'d2',label:'D2',date:'6/22 週一',title:'淺草一日遊 🏮',area:'淺草・越中島',bg:'#EEEDFE',fg:'#3730a3',
+    alerts:[
+      {t:'ok',title:'✅ D2 所有票券已成功預訂！',text:'人力車、忍者咖啡館、屋形船全數成功。各自提前20分鐘到場。'},
+      {t:'warn',title:'🚢 屋形船登船地點：越中島 Etchujima Pier！',text:'不是淺草！搭地鐵至門前仲町站4號出口，步行約15分鐘至越中島公園乘船場。19:00前務必抵達。'},
+      {t:'info',title:'🍽 午餐三選一：米久本店 / Tonkatsu Yutaka / 葵丸進',text:'米久本店：傳承120年壽喜燒，現場排隊，只收現金，11:00開門，雷門步行12分鐘。\nTonkatsu Yutaka：炸豬排飯，可用 App 提前訂位，避免現場等待。\n葵丸進：淺草老舖天婦羅定食，份量扎實，現場排隊。'},
+    ],
+    acts:[
+      {time:'10:30',name:'🎟 淺草人力車體驗',map:'浅草 人力車 雷門 東京',detail:'淺草站1號出口，穿過雷門從外往內拍，超好拍！',tip:'司機帶你去私房拍照點，30~60分鐘。',sub:sc('淺草線・淺草站','Asakusa Station Tokyo','#e5171f'),note:''},
+      {time:'11:20',name:'午餐：米久本店 或 Tonkatsu Yutaka 或 葵丸進 🍖',map:'米久本店 浅草 東京',detail:'<b>選A 米久本店壽喜燒：</b>從雷門步行約12分鐘，11:00開店，只收現金，現場排隊。<br><b>選B Tonkatsu Yutaka 炸豬排：</b>可 App 提前訂位，不必排隊。<br><b>選C 葵丸進 天婦羅定食：</b>淺草老舖天婦羅名店，定食份量扎實，現場排隊。',tip:'三間都在淺草寺附近，當天再決定！若選米久，人力車結束後立刻前往排隊。',sub:`${mc('米久地圖','米久本店 浅草 東京')} <a class="chip cmap" href="https://maps.google.com/?q=Tonkatsu+Yutaka+浅草+東京" target="_blank">🗺 Yutaka地圖</a> <a class="chip cmap" href="https://maps.google.com/?q=葵丸進+浅草+東京" target="_blank">🗺 葵丸進地圖</a> <a class="chip cbook" href="https://tabelog.com/tw/tokyo/A1311/A131102/13003669/" target="_blank">🎟 Yutaka訂位</a>`,note:'💴 米久只收現金！Yutaka可App訂位'},
+      {time:'13:00',name:'淺草寺・仲見世通逛街',map:'浅草寺 仲見世通 東京',detail:'淺草寺參拜、仲見世通買布丁和銅鑼燒，A4出口周邊漫步。',tip:'買淺草絲滑布丁（A4出口）+ 龜十爆漿銅鑼燒 + 壽清庵抹茶可麗餅！',sub:null,note:''},
+      {time:'15:00',name:'🎟 忍者體驗咖啡館 淺草',map:'Ninja Experience Cafe Asakusa Tokyo',detail:'淺草站1號出口，穿忍者服、投擲手里劍。',tip:'14:40 到場（提前20分鐘）。',sub:null,note:'⏰ 14:40 到場'},
+      {time:'16:30',name:'隅田川周邊散步・休息',map:'隅田川 吾妻橋 浅草 東京',detail:'沿隅田川散步欣賞晴空塔，養精蓄銳準備屋形船。',tip:'',sub:null,note:''},
+      {time:'19:00',name:'🎟 屋形船 越中島乘船場報到',map:'越中島 Etchujima pier 屋形船 東京',detail:'19:00 報到，19:20 開船！天婦羅＋壽喜燒吃到飽，含暢飲。',tip:'「不良一族尋愛記」的那艘船！',sub:sc('大江戶線・門前仲町4號出口','門前仲町駅 4番出口 東京','#b5007f'),note:'⚠️ 19:00前務必抵達！越中島，不是淺草！'},
+    ],
+    meals:[
+      {type:'午餐（三選一）',name:'米久本店壽喜燒 或 Tonkatsu Yutaka 或 葵丸進',map:'米久本店 浅草 東京',items:'米久：百年關東風味壽喜燒，只收現金，現場排隊，11:00開始。\nYutaka：炸豬排飯，可 App 訂位，不用排隊。\n葵丸進：淺草老舖天婦羅定食，份量扎實，現場排隊。',book:`<a class="chip cbook" href="https://tabelog.com/tw/tokyo/A1311/A131102/13003669/" target="_blank">🎟 Yutaka訂位</a> <a class="chip cmap" href="https://maps.google.com/?q=葵丸進+浅草+東京" target="_blank">🗺 葵丸進</a>`,back:'最終備案：浅草牛かつ（炸牛排）',backMap:'浅草牛かつ 雷門 東京'},
+      {type:'下午茶',name:'淺草絲滑布丁 + 龜十銅鑼燒 + 壽清庵抹茶可麗餅',map:'浅草 シルクプリン 亀十 東京',items:'A4出口附近必吃甜點。壽清庵抹茶可麗餅 — 仲見世通附近，抹茶風味濃郁，邊走邊吃！',book:null,back:'',backMap:''},
+      {type:'晚餐 ✅已預訂',name:'🚢 屋形船 天婦羅＋壽喜燒吃到飽',map:'越中島 Etchujima pier 屋形船 東京',items:'天婦羅＋壽喜燒全餐，含暢飲，19:20開船，欣賞隅田川夜景。',book:null,back:'備案：淺草橫町 江戶風居酒屋街',backMap:'浅草横丁 東京'},
+    ],cols:3
+  },
+  {
+    id:'d3',label:'D3',date:'6/23 週二',title:'築地市場 + teamLab + 銀座',area:'築地・豐洲・銀座・新宿',bg:'#E6F1FB',fg:'#1e3a5f',
+    alerts:[
+      {t:'warn',title:'⏰ teamLab 場次 12:30–16:00，13:00前必須入場！',text:'超過13:00就無法進入，不能退票！帶毛巾、備用襪子，穿短褲，需脫鞋涉水。⏰ 11:00前就要離開築地出發！'},
+      {t:'ok',title:'✅ 六歌仙已付訂金（3人 · 每人14,500日圓）',text:'新宿西口 D5出口30秒。提前10分鐘到，Tabelog App 查預訂。'},
+    ],
+    acts:[
+      {time:'09:30',name:'築地外市場巡禮 🐟',map:'築地場外市場 東京',detail:'大江戶線築地市場站 A1出口。3樓休憩所分頭採買後集合。',tip:'必吃：玉子燒（松露/丸武）、現烤生蠔/帆立貝、黑鮪魚大腹握壽司、草莓大福。',sub:sc('大江戶線・築地市場 A1','Tsukijishijo Station Exit A1 Tokyo','#b5007f'),note:'⏰ 11:00前離開！趕去豐洲 teamLab'},
+      {time:'11:00',name:'前往 teamLab Planets',map:'teamLab Planets TOKYO 豊洲',detail:'築地市場（大江戶線）→ 汐留（轉百合海鷗號）→ 新豐洲站步行，全程約30分鐘。',tip:'',sub:sc('百合海鷗號・新豐洲','Shintoyosu Station Yurikamome Tokyo','#009944'),note:''},
+      {time:'12:30',name:'🎟 teamLab Planets ⭐（12:30–16:00場次）',map:'teamLab Planets TOKYO 豊洲',detail:'場次時間 12:30–16:00，入場截止 13:00！沉浸式光影展，需脫鞋涉水。',tip:'帶毛巾、備用襪子，穿短褲。出口前有 teamLab 限定點心與紀念品！',sub:null,note:'⚠️ 13:00 前必須入場！超過不能進！'},
+      {time:'15:00',name:'銀座購物動線 🛍',map:'銀座 Workman Marronnier Gate Tokyo',detail:'#Workman Girl（Marronnier Gate 1）→ Bic Camera（買SP86）→ 2nd STREET 銀座 → Uniqlo 12層旗艦 → 伊東屋文具 → 銀座Loft / HANDS Ginza（找roomie防水毛巾）。',tip:'',sub:sc('銀座線・銀座站','Ginza Station Tokyo','#f6ad15'),note:''},
+      {time:'18:30',name:'新宿マルイ 購物 🛍（Oioi Marui）',map:'新宿マルイ 新宿 東京',detail:'從銀座搭丸之內線→新宿三丁目站直通。日本本土百貨，韓系美妝、男女裝、鞋類選品俱全，購物後順路回民宿。',tip:'Marui 不定期有外籍旅客優惠折扣，記得出示護照！',sub:sc('丸之內線・新宿三丁目','Shinjuku-sanchome Station Tokyo','#f15f2a'),note:''},
+      {time:'20:45',name:'燒肉亭 六歌仙 本館 ✅',map:'燒肉亭 六歌仙 本館 新宿西口',detail:'新宿西口站 D5出口步行30秒，Sunflower大樓6-7F。',tip:'120分鐘和牛燒肉＋螃蟹海鮮吃到飽！',sub:sc('新宿西口站 D5出口','新宿西口駅 D5出口 東京','#b5007f'),note:'⏰ 提前10分鐘，帶Tabelog App'},
+    ],
+    meals:[
+      {type:'午餐',name:'黑銀鮪屋 / 狐狸屋',map:'黒銀 築地場外市場 Tokyo',items:'鮪魚赤身飯、牛雜丼（築地A1出口附近）。',book:null,back:'備案：虎杖（海鮮珠寶盒/赤身）',backMap:'虎杖 築地 Tokyo'},
+      {type:'下午茶',name:'Blue Bottle Coffee 新豐洲',map:'Blue Bottle Coffee 新豊洲 Tokyo',items:'手沖咖啡、格紋鬆餅（teamLab後）。',book:null,back:'備案：teamLab展區限定點心',backMap:''},
+      {type:'晚餐 ✅已付訂金',name:'燒肉亭 六歌仙 本館',map:'燒肉亭 六歌仙 本館 新宿西口',items:'和牛燒肉＋螃蟹海鮮120分鐘吃到飽（3人），新宿西口 D5出口30秒。',book:null,back:'備案：蟹まみれ（鱈場蟹/松葉蟹）',backMap:'蟹まみれ 新宿 Tokyo'},
+    ],cols:3
+  },
+  {
+    id:'d4',label:'D4',date:'6/24 週三',title:'樂器街 + 秋葉原 + 原宿貓街 + 鐵塔夜景',area:'御茶之水・秋葉原・原宿・六本木・新宿',bg:'#FEF0DA',fg:'#7c2d12',
+    alerts:[
+      {t:'ok',title:'✅ Tokyo City View + 麻布よこ田 全數已付訂',text:'Tokyo City View 18:00入場，19:30離開去毛利庭園，19:50出發。麻布よこ田 21:00入座，Tabelog App查預訂。'},
+    ],
+    acts:[
+      {time:'10:30',name:'御茶之水・樂器街 🎸',map:'石橋楽器店 御茶ノ水 Tokyo',detail:'推薦石橋樂器(Ishiibashi)、BIGBOSS，可退稅。11:00開門。',tip:'公婆可在附近 Pronto 咖啡廳休息，或逛神田明神古蹟（步行10分鐘）。',sub:sc('JR・御茶之水站','Ochanomizu Station Tokyo','#f15a22'),note:''},
+      {time:'11:30',name:'🍽 午餐 二選一 — Plan A 或 Plan B',map:'牛カツ京都勝牛 ヨドバシAkiba 秋葉原',detail:'<b>🅐 Plan A — 秋葉原 京都勝牛炸牛排</b><br>御茶之水→JR總武線1站→秋葉原，直上 Yodobashi Akiba 8樓現場排隊（約30-40分）。吃完搭都營新宿線→東新宿回民宿放吉他（約25-30分）→再出發原宿。<br><br><b>🅑 Plan B — 新宿 肉屋の台所 歌舞伎町店 和牛食べ放題</b><br>御茶之水→JR→秋葉原→都營新宿線→新宿三丁目（約20分）。步行至歌舞伎町，A4/A5黒毛和牛100分食べ放題約6,000日圓/人。吃完步行回民宿放吉他（約15分）→再出發原宿。',tip:'Plan A：想吃炸牛排就選這個，排隊約30-40分。\nPlan B：肉量豐富CP值高，吃完走回民宿最順路！建議提前用 Hot Pepper App 預約。',sub:`${mc('🅐 Plan A 地圖','牛カツ京都勝牛 ヨドバシAkiba 秋葉原')} <a class="chip cmap" href="https://maps.google.com/?q=肉屋の台所+新宿歌舞伎町+第２ショーリビル2F" target="_blank">🗺 🅑 Plan B 地圖</a> <a class="chip cbook" href="https://www.hotpepper.jp/strJ001127407/" target="_blank">🎟 Plan B 預約</a>`,note:'🅐 Plan A 備案：丸五豬排（秋葉原排隊名店）\n🅑 Plan B：約6,000日圓/人・100分鐘・當日訂也OK'},
+      {time:'14:30',name:'原宿・貓街（Cat Street）→ 表參道 👟',map:'Cat Street 原宿 表參道 東京',detail:'秋葉原（JR山手線）→ 原宿站竹下口。建議路線：竹下通（WEGO）→ 裏原宿貓街（Atmos/KITH/Maison Kitsuné）→ OVERRIDE 神宮前旗艦 → 表參道（Omotesando Hills / Root ce可麗餅 / LV.Prada.Dior外觀打卡）。',tip:'貓街走到底自然接表參道，再往南就靠近澀谷，方向完全順路！',sub:sc('JR・原宿站','Harajuku Station Tokyo','#f15a22'),note:'⏰ 17:30 必須出發去六本木！搭都營巴士「澀01」（澀谷東口51號站牌）'},
+      {time:'18:00',name:'🎟 Tokyo City View 52F 看點燈鐵塔 🗼',map:'Tokyo City View Roppongi Hills 52F',detail:'澀谷站東口51號站牌搭都營巴士「澀01」→ 六本木Hills站（最近、最輕鬆）。',tip:'進場後先去毛利庭園（蠟筆小新、哆啦A夢！），天黑後拍鐵塔水中倒影最清晰。',sub:sc('六本木站 1C出口','六本木駅 1C出口 Roppongi Hills','#b5007f'),note:'⚠️ 19:50前一定要離開！'},
+      {time:'19:50',name:'出發前往麻布よこ田',map:'天冨良 麻布よこ田 新宿別邸 西新宿1-19-13',detail:'搭大江戶線（六本木站→新宿站，約9分鐘），新宿站6號出口步行3分鐘。',tip:'六本木站大江戶線月台在地下42公尺！提早移動。',sub:sc('大江戶線・新宿站6號出口','新宿駅 6番出口 西新宿 東京','#b5007f'),note:'⚠️ 新宿站確認好「6號出口/西新宿」！'},
+      {time:'21:00',name:'🎟 天冨良 麻布よこ田 新宿別邸 ✅',map:'天冨良 麻布よこ田 新宿別邸 西新宿',detail:'西新宿1-19-13，新宿站6號出口步行3分鐘。日本板前風格天婦羅割烹（3人）。',tip:'回程：大江戶線新宿站→東新宿站（約8分鐘，4站直達）。',sub:null,note:'⏰ 提前10分鐘，帶Tabelog App'},
+      {time:'23:00',name:'新宿西口思出橫丁 🏮',map:'新宿西口思い出横丁 東京',detail:'麻布よこ田用餐後，步行約5分鐘即達。80家密集居酒屋、燒鳥、串燒小攤，昭和年代濃厚氛圍。',tip:'隨便走進一間都是驚喜，站著喝也很有味道！',sub:null,note:''},
+    ],
+    meals:[
+      {type:'午餐（二選一）',name:'🅐 京都勝牛 / 🅑 肉屋の台所',map:'牛カツ京都勝牛 ヨドバシAkiba 秋葉原',items:'🅐 Plan A：秋葉原 Yodobashi Akiba 8F 現場排隊30-40分，吃完搭地鐵回民宿放吉他（約30分）。\n🅑 Plan B：新宿歌舞伎町 A4/A5黒毛和牛食べ放題100分・約6,000日圓/人，吃完步行15分回民宿放吉他。',book:`${mc('🅐 Plan A 地圖','牛カツ京都勝牛 ヨドバシAkiba 秋葉原')} <a class="chip cmap" href="https://maps.google.com/?q=肉屋の台所+新宿歌舞伎町+第２ショーリビル2F+新宿区歌舞伎町1丁目6-14" target="_blank">🗺 🅑 Plan B 地圖</a> <a class="chip cbook" href="https://www.hotpepper.jp/strJ001127407/" target="_blank">🎟 Plan B 預約</a>`,back:'🅐 Plan A 備案：丸五豬排 Marugo（秋葉原）',backMap:'丸五 秋葉原 東京'},
+      {type:'下午茶（可選）',name:'原宿貓街途中點心',map:'Cat Street 原宿 東京',items:'貓街沿路各式甜點，或ICHIBIKO草莓甜點（若順路過東京站）。',book:null,back:'備案：AUDREY 草莓奶油捲',backMap:'オードリー 東京駅 Tokyo'},
+      {type:'晚餐 ✅已付訂金',name:'天冨良 麻布よこ田 新宿別邸',map:'天冨良 麻布よこ田 新宿別邸',items:'板前風格天婦羅割烹（3人），西新宿1-19-13，21:00入座，每人12,000日圓。',book:null,back:'備案：博多もつ鍋 前田屋（宵夜開到12am）',backMap:'博多もつ鍋 前田屋 新宿東口'},
+    ],cols:3
+  },
+  {
+    id:'d5',label:'D5',date:'6/25 週四',title:'利久牛舌 + 吉祥寺 + 吉卜力 + 前田屋',area:'新宿・吉祥寺・三鷹',bg:'#EAF4DE',fg:'#14532d',
+    alerts:[
+      {t:'ok',title:'✅ 利久 + 吉卜力 + 前田屋 全數預訂成功！',text:'利久11:30（LUMINE EST 7F），吉卜力16:00（護照正本＋紙本QR Code），前田屋20:30（已成功預訂）。'},
+      {t:'warn',title:'⏰ 吉卜力 15:20 排接駁巴士！帶紙本QR Code + 護照',text:'16:00最後一場，15:20三鷹站南口排隊，15:30接駁車出發。遲到就壓縮參觀時間！'},
+      {t:'info',title:'🍲 晚餐：牛腸鍋 / 博多もつ鍋 前田屋',text:'吉卜力閉館後穿過井之頭公園散步至吉祥寺站，19:30出發搭JR直達新宿，20:30博多もつ鍋 前田屋 新宿東口店。'},
+    ],
+    acts:[
+      {time:'11:30',name:'🎟 利久 炭烤牛舌 LUMINE EST 新宿（午餐）',map:'牛たん炭焼利久 ルミネエスト新宿店',detail:'LUMINE EST 7樓，新宿車站東口正上方，民宿步行約12-14分鐘。',tip:'必點：「極」定食（厚切炭烤牛舌）。<br>🛍 <b>WEGO ルミネエスト 新宿店</b>在同棟百貨，吃完直接逛！男女裝T恤約1,500日圓起。',sub:sc('JR新宿站東口・LUMINE EST','新宿駅 東口 LUMINE EST Tokyo','#f15a22'),note:'⏰ 提前10分鐘，帶Tabelog App'},
+      {time:'13:00',name:'出發前往吉祥寺 🛍',map:'吉祥寺サンロード商店街',detail:'省力線：東新宿（大江戶線）→ 中野坂上（轉丸之內線）→ 荻窪（轉JR中央線）→ 吉祥寺。完全避開新宿迷宮！',tip:'公婆可在 Kirarina 百貨（車站直連）或井之頭公園湖畔咖啡廳休息。',sub:sc('JR中央線・吉祥寺南口','Kichijoji Station South Exit Tokyo','#f15a22'),note:''},
+      {time:'13:30',name:'吉祥寺 Sunroad 採買 + 佐藤肉餅 💊',map:'吉祥寺サンロード商店街',detail:'全東京最便宜藥妝！Loft 文具，佐藤肉餅炸牛肉丸（Sunroad門口永遠在排隊），小笹最中伴手禮。',tip:'藥妝清單一次掃齊！公婆在全室內平坦好逛。',sub:null,note:''},
+      {time:'15:20',name:'三鷹站南口排接駁巴士 🚌',map:'三鷹駅 南口 バス停 吉卜力',detail:'吉祥寺→三鷹（JR1站），南口出來找黃色吉卜力接駁巴士。',tip:'15:20前到！車程約5分鐘。',sub:sc('JR・三鷹站南口','Mitaka Station South Exit Tokyo','#f15a22'),note:'⏰ 15:20前抵達！'},
+      {time:'16:00',name:'⭐ 三鷹之森吉卜力美術館',map:'三鷹の森ジブリ美術館',detail:'最後一場！離場前在禮品店買獨家吉卜力文具、明信片。',tip:'閉館後穿過井之頭公園散步至吉祥寺站（約15分鐘），也可搭接駁巴士回三鷹站。',sub:null,note:'🎫 紙本QR Code + 護照正本！'},
+      {time:'19:30',name:'吉祥寺站→新宿→前田屋',map:'博多もつ鍋 前田屋 新宿東口',detail:'JR 吉祥寺站搭中央線快速直達新宿站（15分鐘），東口出站步行3分鐘到前田屋。',tip:'到新宿站後記得從「東口」出站！',sub:sc('JR中央線・新宿東口','新宿駅 東口 Tokyo','#f15a22'),note:''},
+    ],
+    meals:[
+      {type:'午餐 ✅已付訂金',name:'利久 炭烤牛舌 LUMINE EST 新宿',map:'牛たん炭焼利久 ルミネエスト新宿店',items:'必點：「極」定食（厚切炭烤牛舌）。LUMINE EST 7F，從民宿步行12-14分鐘。',book:null,back:'備案：幸福鬆餅（舒芙蕾鬆餅）',backMap:'幸福のパンケーキ 吉祥寺'},
+      {type:'下午茶',name:'幸福鬆餅 幸福のパンケーキ',map:'幸福のパンケーキ 吉祥寺',items:'超軟舒芙蕾鬆餅，吉祥寺南口商店街附近地下室。',book:null,back:'備案：白髭泡芙（龍貓造型）',backMap:'白髭のシュークリーム工房 東京'},
+      {type:'晚餐 ✅已成功',name:'博多もつ鍋 前田屋 新宿東口店',map:'博多もつ鍋 前田屋 新宿東口',items:'博多牛腸鍋，味噌/醬油/辣味三種選擇。還有明太子、馬肉刺身等特色料理，開到深夜12am。',book:null,back:'備案：梅丘壽司美登利',backMap:'梅丘寿司の美登利 渋谷 Tokyo'},
+    ],cols:3
+  },
+  {
+    id:'d6',label:'D6',date:'6/26 週五',title:'豪德寺 + かにざんまい + mipig + SHIBUYA SKY',area:'新宿・豪德寺・原宿・澀谷',bg:'#FBEAF0',fg:'#831843',
+    alerts:[
+      {t:'info',title:'🎫 SHIBUYA SKY — 當天自由決定要不要入場',text:'剩16:00場次，黃昏光線拍照也不錯。逛街途中心情好就買票，澀谷站B6出口直通，不強求！這天主攻逛街＋甜點。'},
+      {t:'info',title:'🐷 mipig cafe — 14:50 到場（15:00場次）',text:'不可把豬抱起來，把腳伸直、保持安靜。55分鐘體驗。兒子+公婆去mipig，你們夫妻專攻澀谷PARCO 潮流百貨！'},
+    ],
+    acts:[
+      {time:'08:30',name:'豪德寺・千隻招財貓 🐱',map:'豪徳寺 招き猫 東京',detail:'東新宿（大江戶線）→ 新宿西口→小田急電鐵→豪德寺站。或京王線→明大前→世田谷線→宮之坂站（碰運氣搭招財貓彩繪電車！）',tip:'無需門票，拍照超療癒。',sub:sc('世田谷線・宮之坂站','Miyanosaka Station Setagaya Line Tokyo','#009944'),note:''},
+      {time:'12:15',name:'Kanizammai かにざんまい 新宿店 🦀',map:'かにざんまい 新宿店 東京',detail:'副都心線新宿三丁目站 B3出口直達。5人螃蟹料理。',tip:'伊勢丹 鮨魯山也非常值得，若有時間可去現場排隊！',sub:sc('副都心線・新宿三丁目 B3','Shinjuku-sanchome Station B3 Tokyo','#b5007f'),note:'⏰ 12:15入座 ✅已成功'},
+      {time:'14:50',name:'🎟 mipig cafe 原宿（15:00場次）🐷 ＋ 澀谷 PARCO 分頭行動',map:'mipig cafe harajuku Tokyo',detail:'<b>👨‍👩‍👦 兒子＋公婆：</b>新宿三丁目（副都心線F線，2站）→ 明治神宮前站5號出口，步行5分鐘。14:50到場，55分鐘體驗，無餐點，不可把豬抱起來。<br><br><b>👫 你＋先生：</b>明治神宮前（副都心線1站）→ 澀谷站 → 澀谷 PARCO 潮流百貨（CDG / Human Made）自由逛街，約2-2.5小時。',tip:'mipig結束約15:55，兒子+公婆在明治神宮前站等你們，一起搭副都心線→澀谷，16:30前在澀谷PARCO門口集合！',sub:sc('副都心線・明治神宮前 5號','Meiji-Jingumae Station Exit 5 Tokyo','#b5007f'),note:'⏰ 14:50到場（mipig組）· 55分鐘 · ⚠️ 沒有餐點 · 不可把豬抱起來\n👫 PARCO組：澀谷站直接過去，16:30前在PARCO門口集合'},
+      {time:'16:00',name:'澀谷下午逛街 + 甜點 🛍',map:'渋谷PARCO Tokyo',detail:'PARCO 潮流百貨（CDG/Human Made）→ WORKMAN Plus（機能衣）→ Mega Donki 唐吉訶德補貨。途中可以吃甜點：I\'m donut? 原味生甜甜圈（宮益坂出口）、虎屋羊羹（渋谷ヒカリエ）。',tip:'逛街途中如果心情好，可考慮順手買 SHIBUYA SKY 16:00場（澀谷站B6出口直通），黃昏光線拍照也很美！不一定要搶，當天再決定。',sub:sc('各線・澀谷站','Shibuya Station Tokyo','#f15a22'),note:'🎫 SHIBUYA SKY 可選：16:00場次，逛街途中決定要不要入場'},
+      {time:'20:45',name:'🎟 炭治郎 澀谷 黑毛和牛 ✅',map:'炭治郎 渋谷 黒毛和牛 Tokyo',detail:'從SHIBUYA SKY往澀谷全向交叉路口走，穿過路口進宇田川町，Atlas澀谷公園通大樓4F，步行約10分鐘。',tip:'吃完下樓逛 WORKMAN Plus（機能衣）、Mega Donki 最後補貨！<br>🛍 <b>WEGO SHIBUYA109店</b>就在澀谷站A2出口，步行0分鐘，最後一夜採買T恤好時機！',sub:null,note:'⏰ 提前10分鐘，帶tablecheck App'},
+    ],
+    meals:[
+      {type:'午餐 ✅已成功',name:'Kanizammai かにざんまい 新宿店',map:'かにざんまい 新宿店 東京',items:'螃蟹料理名店 · <b>蟹肉放題</b>，5人，12:15入座，副都心線新宿三丁目站B3直通。',book:null,back:'備案：伊勢丹 鮨魯山（現場排隊，非常值得）',backMap:'鮨 魯山 伊勢丹新宿'},
+      {type:'下午茶',name:"I'm donut ? 澀谷",map:'アイムドーナツ 渋谷 Tokyo',items:'原味生甜甜圈，澀谷宮益坂出口。',book:null,back:'備案：虎屋羊羹 精緻和菓子',backMap:'とらや 渋谷ヒカリエ Tokyo'},
+      {type:'晚餐 ✅已付訂金',name:'炭治郎 澀谷 黑毛和牛吃到飽',map:'炭治郎 渋谷 黒毛和牛 Tokyo',items:'Atlas澀谷公園通大樓4F，5人，20:45入座。吃完下樓 WORKMAN Plus + Mega Donki 最後補貨！',book:null,back:'備案：姬島居酒屋（新橋/銀座）',backMap:'姫島 新橋 東京'},
+    ],cols:3
+  },
+  {
+    id:'d7',label:'D7',date:'6/27 週六',title:'返程・最後採買',area:'新宿→羽田',bg:'#F3F0E9',fg:'#44403c',
+    alerts:[],
+    acts:[
+      {time:'09:00',name:'新宿周邊最後採買 🛒',map:'Mega Donki 東新宿 東京',detail:'民宿附近 Mega Donki、藥妝店最後補貨。',tip:'',sub:null,note:''},
+      {time:'10:30',name:'機場接送 Taxi 出發 🚖',map:'羽田空港第2ターミナル Tokyo',detail:'10:30 預定接送車，從民宿直達羽田機場 T2。NH853 13:20起飛。',tip:'入關後記得買 NEWYORK PERFECT CHEESE！',sub:null,note:'🚖 10:30 預定車 · 準時出發'},
+    ],
+    meals:[
+      {type:'機場午餐',name:'羽田機場美食街',map:'羽田空港 第3ターミナル レストラン Tokyo',items:'各式日式定食。入關後別忘了買 NEWYORK PERFECT CHEESE 機場限定伴手禮！',book:null,back:'',backMap:''},
+    ],cols:1
+  },
+];
+
+// ── RENDER DAYS ──
+function renderDays() {
+  const cont = document.getElementById('dayCards');
+  days.forEach((d,i) => {
+    const alertsH = d.alerts.map(a=>`<div class="al al-${a.t==='red'?'red':a.t==='ok'?'ok':a.t==='info'?'info':'warn'}"><div class="at">${a.title}</div><div class="ab">${a.text}</div></div>`).join('');
+    const actsH = d.acts.map(a=>`
+      <div class="aitem">
+        <div class="aleft"><div class="atime">${a.time.replace(':','<br>')}</div><div class="adot" style="border-color:${d.fg}"></div></div>
+        <div class="abody">
+          <div class="aname-row"><span class="aname">${a.name}</span>${mc('地圖',a.map)}</div>
+          <div class="adetail">${a.detail}</div>
+          ${a.sub?`<div class="tags">${a.sub}</div>`:''}
+          ${a.tip?`<div class="atip">${a.tip}</div>`:''}
+          ${a.note?`<div class="anote">${a.note}</div>`:''}
+        </div>
+      </div>`).join('');
+    const mc2=d.cols===1?'1fr':d.cols===2?'1fr 1fr':'1fr 1fr 1fr';
+    const mealsH=d.meals.map(m=>`
+      <div class="mc">
+        <div class="mtype">${m.type}</div>
+        <div class="mnrow"><span class="mname">${m.name}</span>${mc('地圖',m.map)}${m.book||''}</div>
+        <div class="mitems">${m.items}</div>
+        ${m.back?`<div class="mback">備案：${mc(m.back.replace('備案：',''),m.backMap)}</div>`:''}
+      </div>`).join('');
+    const isOpen=i===0;
+    const card=document.createElement('div');
+    card.className='dc';
+    card.innerHTML=`
+      <div class="dt" onclick="tog('${d.id}')">
+        <div class="dnum" style="background:${d.bg};color:${d.fg}">${d.label}</div>
+        <div class="dmeta"><div class="dtitle">${d.title}</div><div class="ddate">${d.date} · ${d.area}</div></div>
+        <div class="dchev ${isOpen?'open':''}" id="chev-${d.id}">▾</div>
+      </div>
+      <div class="dbody ${isOpen?'open':''}" id="body-${d.id}">
+        ${alertsH}
+        ${bkHTML(d.id)}
+        <div class="sh">行程活動</div>
+        <div class="alist">${actsH}</div>
+        <div class="sh" style="margin-top:1.25rem">餐飲安排</div>
+        <div class="mgrid" style="grid-template-columns:${mc2}">${mealsH}</div>
+      </div>`;
+    cont.appendChild(card);
+  });
+}
+function tog(id){
+  document.getElementById('body-'+id).classList.toggle('open');
+  document.getElementById('chev-'+id).classList.toggle('open');
+}
+
+// ── SHOPPING ──
+const shopData = [
+  {label:'D2',date:'6/22 淺草・新宿',items:[
+    {icon:'🏮',name:'仲見世通・雷門周邊',desc:'江戶風紀念品、人形燒、日式小飾品。',map:'仲見世通 浅草 Tokyo'},
+    {icon:'🍳',name:'合羽橋道具街 Kappabashi',desc:'170家專業餐廚具批發街，刀具、陶瓷、料理道具一次買齊。',map:'合羽橋道具街 東京 Kappabashi'},
+    {icon:'🛁',name:'新宿高島屋 HANDS新宿店',desc:'有 roomie 防水毛巾，回民宿順路可買。',map:'東急ハンズ 新宿タイムズスクエア 東京'},
+  ]},
+  {label:'D3',date:'6/23 銀座',items:[
+    {icon:'🧥',name:'#Workman Girl（Marronnier Gate 1）',desc:'機能服飾CP值超高，銀座品項最齊。',map:'Workman Girl Marronnier Gate Ginza Tokyo'},
+    {icon:'💄',name:'Bic Camera 銀座（買SP86美容儀）',desc:'電器美容採買。',map:'Bic Camera Ginza Tokyo'},
+    {icon:'👗',name:'2nd STREET 銀座店',desc:'精緻高級古著挖寶。',map:'2nd Street 銀座 Tokyo'},
+    {icon:'📚',name:'伊東屋 itoya（12層文具天堂）',desc:'文具控必逛。',map:'伊東屋 銀座 Tokyo'},
+    {icon:'👕',name:'Uniqlo 銀座 12層樓旗艦',desc:'全系列最齊全，附近有GU。',map:'Uniqlo 銀座 Tokyo'},
+    {icon:'🛁',name:'銀座Loft / HANDS Ginza',desc:'有 roomie 防水毛巾，建議這天買。',map:'Loft 銀座 Tokyo'},
+  ]},
+  {label:'D4',date:'6/24 御茶之水・秋葉原・原宿/貓街',items:[
+    {icon:'🎸',name:'石橋樂器 Ishiibashi Music',desc:'11:00開門，吉他/貝斯首選，可退稅。',map:'石橋楽器店 御茶ノ水 Tokyo'},
+    {icon:'🎸',name:'BIGBOSS 御茶之水',desc:'另一間信譽好店，可退稅。',map:'BIGBOSS 御茶ノ水 Tokyo'},
+    {icon:'🤖',name:'2nd STREET 秋葉原店',desc:'二手動漫配件，兒子主戰場。',map:'2nd Street 秋葉原 Tokyo'},
+    {icon:'🕹',name:'Radio Kaikan',desc:'模型・動漫周邊大本營。',map:'ラジオ会館 秋葉原 Tokyo'},
+    {icon:'👕',name:'WEGO 原宿本店',desc:'男女兼用T恤約1,500日圓起，街頭感印花/Oversize版型，竹下口步行1分鐘。',map:'WEGO 原宿本店 東京'},
+    {icon:'👟',name:'Atmos / A+S（原宿）',desc:'日本限定球鞋。',map:'Atmos 原宿 Tokyo'},
+    {icon:'🦊',name:'Maison Kitsuné（原宿）',desc:'日本買比歐洲便宜很多！',map:'Maison Kitsuné 原宿 Tokyo'},
+    {icon:'🎩',name:'OVERRIDE 神宮前旗艦店',desc:'質感帽款旗艦店。',map:'OVERRIDE 神宮前 Tokyo'},
+  ]},
+  {label:'D5',date:'6/25 吉祥寺・三鷹',items:[
+    {icon:'🌶',name:'黃金一味（祇園味幸）',desc:'日本一辛い辣椒粉，辣度是鷹の爪10倍！三浦屋超市 吉祥寺サンロードA區販售，Sunroad採買順路買。',map:'三浦屋 吉祥寺店 吉祥寺サンロード'},
+    {icon:'💊',name:'Sunroad 商店街藥妝',desc:'全東京最便宜藥妝，一次掃齊！',map:'吉祥寺サンロード商店街'},
+    {icon:'🥩',name:'佐藤肉餅（炸牛肉丸）',desc:'Sunroad門口永遠排隊的吉祥寺名產。',map:'佐藤 吉祥寺 メンチカツ'},
+    {icon:'🍡',name:'小笹（Ozasa）最中',desc:'日本傳統甜點名店，送禮很體面。',map:'小笹 吉祥寺 Tokyo'},
+    {icon:'📓',name:'Loft 吉祥寺店',desc:'精緻文具、生活雜貨，種類全東京最齊。',map:'Loft 吉祥寺 Tokyo'},
+    {icon:'👕',name:'WEGO ルミネエスト 新宿店',desc:'男女兼用T恤，利久同棟百貨吃完直接逛！約1,500日圓起。',map:'WEGO ルミネエスト新宿店 東京'},
+    {icon:'🎬',name:'吉卜力美術館禮品店',desc:'獨家文具、明信片，離場前必買！',map:'三鷹の森ジブリ美術館'},
+  ]},
+  {label:'D6',date:'6/26 新宿・原宿・澀谷',items:[
+    {icon:'👕',name:'WEGO SHIBUYA109店',desc:'男女兼用T恤，澀谷站A2出口0分鐘，最後一夜採買T恤好時機！',map:'WEGO SHIBUYA109 渋谷 東京'},
+    {icon:'👟',name:'2nd STREET 原宿店',desc:'貓街潮流感最強，命定鞋。',map:'2nd Street 原宿 Tokyo'},
+    {icon:'🧩',name:'澀谷 PARCO 潮流百貨（CDG/Human Made）',desc:'兒子+公婆去mipig時，夫妻衝PARCO！澀谷最強潮流選品百貨。',map:'渋谷PARCO Tokyo'},
+    {icon:'🧤',name:'WORKMAN Plus 澀谷',desc:'高CP值防水防風機能衣，炭治郎吃完下樓。',map:'WORKMAN Plus 渋谷 Tokyo'},
+    {icon:'🛒',name:'Mega Donki 澀谷（唐吉訶德）',desc:'最後補貨！炭治郎吃完下樓即達。',map:'メガドンキ渋谷本店 Tokyo'},
+  ]},
+  {label:'D7',date:'6/27 羽田機場',items:[
+    {icon:'🧀',name:'NEWYORK PERFECT CHEESE',desc:'機場限定伴手禮，入關後搶購，省去提重物辛苦。',map:'NEWYORK PERFECT CHEESE 羽田空港 Tokyo'},
+  ]},
+];
+
+function renderShopping(){
+  const cont=document.getElementById('shopContent');
+  shopData.forEach(day=>{
+    const itemsH=day.items.map(item=>`
+      <div class="sitem">
+        <div class="sicon">${item.icon}</div>
+        <div class="sbody">
+          <div class="sname">${item.name} ${mc('地圖',item.map)}</div>
+          <div class="sdesc">${item.desc}</div>
+        </div>
+      </div>`).join('');
+    const div=document.createElement('div');
+    div.className='sday';
+    div.innerHTML=`<div class="sday-h"><span class="sbadge2">${day.label}</span>${day.date}</div><div class="sitems">${itemsH}</div>`;
+    cont.appendChild(div);
+  });
+}
+
+// ── TABS ──
+document.querySelectorAll('.ntab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.ntab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('panel-'+t.dataset.p).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+renderDays();
+renderShopping();
+renderBreakfast();
+</script>
+</body>
+</html>
